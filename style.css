@@ -1,9 +1,12 @@
 html, body {
-    padding: 0;
     margin: 0;
+    padding: 0;
     height: 100%;
     width: 100%;
     font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    background-color: #121212;
+    color: #ffffff;
 }
 
 #map {
@@ -11,14 +14,17 @@ html, body {
     top: 0;
     bottom: 0;
     width: 100%;
+    z-index: 0;
 }
 
 .leaflet-tooltip {
-    background: rgba(0, 0, 0, 0.75);
-    color: white;
-    padding: 5px;
+    background: rgba(20, 20, 20, 0.85);
+    color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
     text-align: center;
-    width: 160px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
 }
 
 .tooltip-hide {
@@ -26,529 +32,203 @@ html, body {
 }
 
 .station-popup {
-    width: 250px;
-    bottom: 0px;
-    font-family: 'Montserrat', sans-serif;
+    width: 260px;
+    font-size: 0.95rem;
 }
 
 .station-content {
-    padding: 5px;
+    padding: 10px;
 }
 
 .station-popup .leaflet-popup-content {
-    margin: 0px;
+    margin: 0;
     padding-top: 10px;
 }
 
 .station-popup .leaflet-popup-close-button {
-    margin-top: 12px;
+    margin-top: 10px;
 }
 
-.station-popup .leaflet-popup-content-wrapper {
-    border-radius: 0px;
-    padding: 0px;
-}
-
-.station-popup .leaflet-popup-content-wrapper, .station-popup .leaflet-popup-tip {
-    background: black;
-    color: white;
+.station-popup .leaflet-popup-content-wrapper,
+.station-popup .leaflet-popup-tip {
+    background: #1e1e1e;
+    color: #ffffff;
+    border-radius: 10px;
+    padding: 0;
 }
 
 .station-name {
-    font-size: 1.5em;
+    font-size: 1.4rem;
     font-weight: bold;
-    padding: 5px;
-    border-top: 5px solid white;
+    border-top: 4px solid #ffffff;
+    padding: 10px;
 }
 
 textarea.station-name-edit {
-    background-color: black;
-    color: white;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-    font-size: 1em;
-    height: 1em;
-    width: 200px;
-    margin: 0px;
-    padding: 5px;
-}
-
-.station-info {
-    font-size: 1em;
+    background-color: #1e1e1e;
+    color: #fff;
+    border: 1px solid #555;
+    padding: 6px;
+    font-size: 1rem;
+    width: 90%;
+    border-radius: 5px;
+    resize: none;
 }
 
 .station-buttons {
+    margin-top: 10px;
 }
 
 .station-content-button {
     cursor: pointer;
-    display: inline-block;
-    margin: 2px;
-    padding: 5px;
-    background-color: #333333;
+    padding: 8px 12px;
+    margin: 5px 3px;
+    border-radius: 6px;
+    background-color: #333;
+    color: #fff;
+    transition: background-color 0.3s ease;
 }
 
-.station-delete {
-    float: right;
+.station-content-button:hover {
+    background-color: #555;
 }
 
-.station-build {
-    float: right;
-}
-
+.station-delete,
+.station-build,
 .station-transfer {
     float: right;
-    text-align: center;
-}
-
-.subway-lines {
-    overflow: visible;
 }
 
 .subway-line-group {
     display: inline-block;
-    border-radius: 4px;
-    padding: 4px;
-    margin: 4px;
-    border: 1px solid #999;
-    vertical-align: top;
-    overflow: visible;
-}
-
-.subway-line-long {
-    -webkit-border-radius: 14px;
-    -moz-border-radius: 14px;
-    border-radius: 14px;
-    border: 2px solid rgba(0, 0, 0, 0);
-    box-sizing: border-box;
+    border-radius: 6px;
     padding: 6px;
-    font-size: 12px;
-    font-weight: bold;
-    line-height: 1em;
-    position: relative;
-    display: inline-block;
-    margin-top: 14px;
-    margin-right: 2px;
-    margin-left: 2px;
-    margin-bottom: -12px;
-    height: 28px;
-    top: -12px;
+    margin: 6px;
+    border: 1px solid #555;
+    background-color: #222;
 }
 
-
-.subway-line-long .content {
-    position: relative;
-    height: 100%;
-    display: inline-block;
-    text-align: center;
-}
-
-
-.subway-line {
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
+.subway-line, .subway-line-mini {
     border-radius: 50%;
     box-sizing: border-box;
-    width: 28px;
-    padding: 8px;
-    font-size: 12px;
     font-weight: bold;
-    line-height: 1em;
-    position: relative;
-    display: inline-block;
-    margin: 2px;
+    line-height: 1;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 4px;
+    color: white;
+    box-shadow: 0 0 3px rgba(0,0,0,0.4);
 }
 
-.subway-line .height_fix {
-    margin-top: 100%;
-}
-.subway-line .content {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    height: 100%;
-    width: 100%;
-    text-align: center;
-    margin-top: -6px; /* Note, this must be half the font size */
+.subway-line {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
 }
 
 .subway-line-mini {
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
-    box-sizing: border-box;
-    width: 14px;
-    padding: 4px;
-    font-size: 8px;
-    font-weight: bold;
-    line-height: 1em;
-    position: relative;
-    display: inline-block;
-    margin-top: -2px;
-    top: 4px;
+    width: 18px;
+    height: 18px;
+    font-size: 0.7rem;
 }
 
-.subway-line-mini .height_fix {
-    margin-top: 100%;
-}
-.subway-line-mini .content {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    height: 100%;
-    width: 100%;
-    text-align: center;
-    margin-top: -4px; /* Note, this must be half the font size */
-}
-
-.subway-line-mini.subway-line-long {
-    -webkit-border-radius: 7px;
-    -moz-border-radius: 7px;
-    border-radius: 7px;
-    box-sizing: border-box;
-    padding: 4px;
-    font-size: 8px;
-    font-weight: bold;
-    line-height: 1em;
-    position: relative;
-    display: inline-block;
-    margin-right: 2px;
-    margin-left: 2px;
-    margin-bottom: -5px;
-    height: 14px;
-    width: auto;
-    top: 1px;
-}
-
-.subway-line-mini.subway-line-long .height_fix {
-    margin-top: 0;
-}
-
-.subway-line-mini.subway-line-long .content {
-    position: relative;
-    height: 100%;
-    display: inline-block;
-    text-align: center;
-    top: -3px;
+.subway-line-long {
+    border-radius: 14px;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    height: auto;
+    margin: 6px 4px;
+    white-space: nowrap;
 }
 
 .subway-clickable {
     cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.subway-clickable:hover {
+    transform: scale(1.1);
 }
 
 .subway-selected {
-    border: 2px solid black;
-}
-
-.subway-blue {
-    background-color: #0039A6;
-}
-
-.subway-orange {
-    background-color: #FF6319;
-}
-
-.subway-light-green {
-    background-color: #6CBE45;
-}
-
-.subway-brown {
-    background-color: #996633;
-}
-
-.subway-silver {
-    background-color: #A7A9AC;
-}
-
-.subway-yellow {
-    background-color: #FCCC0A;
-    color: black;
-}
-
-.subway-light-yellow {
-    background-color: #FFF200;
-    color: black;
-}
-
-.subway-gray {
-    background-color: #808183;
-}
-
-.subway-red {
-    background-color: #EE352E;
-}
-
-.subway-green {
-    background-color: #00933C;
-}
-
-.subway-purple {
-    background-color: #B933AD;
-}
-
-.subway-turquoise {
-    background-color: #00ADD0;
-}
-
-.subway-maroon {
-    background-color: #AB3F57;
-}
-
-.subway-black {
-    background-color: #212121;
-    font-size: 10px;
-    margin-top: -5px;
+    border: 2px solid #ffffff;
 }
 
 .subway-deletable {
     cursor: pointer;
 }
 
-#route-header {
-    padding: 10px;
-    margin-top: 10px;
-    border: 1px solid white;
-    border-radius: 5px;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-}
-
-#route-diagram {
-    padding-left: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-right: 20px;
-    background: rgba(255, 255, 255, 0.25);
-    display: none;
-}
-
-#route-diagram-container {
-    position: absolute;
-    max-height: 20%;
-    width: 92%;
-    overflow-y: auto;
-}
-
-.route-diagram-name {
-    font-size: 12px;
-    display: inline-block;
-}
-
-.route-diagram-transfers {
-    display: inline-block;
-    margin-left: 5px;
-}
-
-#starter {
-    width: 66%;
-    height: 90%;
-    margin-left: 5%;
-    margin-top: 2%;
-    z-index: 5000;
-    background: rgba(0, 0, 0, 0.65);
-    color: white;
-    position: absolute;
-}
-
-#game-header {
-    font-size: 3em;
-    font-weight: bold;
-    position: relative;
-    bottom: 0px;
-    width: 100%;
-    height: 100px;
-    text-align: center;
-    padding: 20px 0;
-    margin-bottom: 20px;
-}
-
-#game-video {
-    text-align: center;
-    top: 100px;
-    bottom: 200px;
-    position: absolute;
-    width: 100%;
-}
-
-#game-video video {
-    
-    right: 0; 
-    top: 0;
-    width: auto;
-    height: 100%;
-    z-index: -100;
-    background-size: cover;
-    overflow: hidden;
-}
-
-#game-start {
-    width: 100%;
-    position: absolute;
-    bottom: 0px;
-    height: 200px;
-    white-space: nowrap;
-    overflow: hidden;
-}
-
-.game-start-descriptor {
-    margin: 20px auto;
-}
-
-.game-start-choice-large {
-    border: 1px solid white;
-    padding: 10px;
-    cursor: pointer;
-    margin: 20px auto;
-    width: 200px;
-    height: 100px;
-    line-height: 100px;
-    text-align: center;
-}
-
-.game-start-section {
-    display: block;
-    width: 50%;
-    height: 250px;
-    float: left;
-    overflow-y: auto;
-}
-
-div.game-start-greyed {
-    color: #777;
-    border: 1px solid #777;
-    cursor: default;
-}
-
-.game-start-interior {
-    margin: 10px;
-    padding: 10px;
-    width: auto;
-    border: 1px solid #777;
-}
-
-.game-start-choice-small {
-    border: 1px solid white;
-    display: block;
-    cursor: pointer;
-    margin: 20px;
-    padding: 20px;
-}
-
+/* Subway colors */
+.subway-blue     { background-color: #0039A6; }
+.subway-orange   { background-color: #FF6319; }
+.subway-light-green { background-color: #6CBE45; }
+.subway-brown    { background-color: #996633; }
+.subway-silver   { background-color: #A7A9AC; }
+.subway-yellow   { background-color: #FCCC0A; color: black; }
+.subway-light-yellow { background-color: #FFF200; color: black; }
+.subway-gray     { background-color: #808183; }
+.subway-red      { background-color: #EE352E; }
+.subway-green    { background-color: #00933C; }
+.subway-purple   { background-color: #B933AD; }
+.subway-turquoise { background-color: #00ADD0; }
+.subway-maroon   { background-color: #AB3F57; }
+.subway-black    { background-color: #212121; }
 
 #options {
     position: absolute;
-    padding: 12px;
-    right: 0px;
-    top: 0px;
-    bottom: 0px;
-    background: rgba(0, 0, 0, 0.65);
-    color: white;
-    z-index: 5000;
-    max-height: 100%;
-    overflow-y: hidden;
-    overflow-x: visible;
+    right: 0;
+    top: 0;
+    bottom: 0;
     width: 25%;
-}
-
-#option-section-lines {
-    height: 300px;
-    max-height: 35%;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7);
     overflow-y: auto;
-    overflow-x: visible;
-}
-
-#option-section-route {
-    min-height: 200px;
-    max-height: 30%;
-    display: block;
-    overflow: hidden;
-}
-
-#option-section-status {
-    position: absolute;
-    padding: 12px;
-    bottom: 0px;
-    width: 100%;
-    max-height: 35%;
-    overflow-y: auto;
-}
-
-#game-outcome {
-    font-size: 2em;
-}
-
-.game-icon {
-    display: inline-block;
-    width: 50px;
-}
-
-.game-icon-description {
-    font-size: 0.4em;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    padding-left: 60px;
-}
-
-.game-button {
-    padding: 5px;
-    margin: 5px;
-    border: 1px solid white;
-    border-radius: 5px;
-    cursor: pointer;
-    display: inline-block;
+    z-index: 5000;
     color: #fff;
-    text-decoration: none;
 }
 
-.attribution {
-    font-size: 0.6em;
-    color: #aaaaaa;
-    width: 90%;
-    text-align: right;
+#route-diagram {
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    margin-top: 10px;
 }
 
-.attribution a {
-    color: #bbbbbb;
+.route-diagram-name {
+    font-size: 1rem;
+    font-weight: bold;
 }
 
 .tooltip {
-    display: inline-block;
     position: relative;
+    display: inline-block;
 }
 
-/* Tooltip text */
 .tooltip .tooltiptext {
     visibility: hidden;
-    width: 100px;
-    background-color: black;
+    background-color: #000;
     color: #FF6969;
     text-align: center;
-    padding: 5px 0;
+    padding: 8px;
     border-radius: 6px;
- 
-    /* Position the tooltip text - see examples below! */
     position: absolute;
     z-index: 1;
-    bottom: 100%;
-    left: 50%; 
-    margin-left: -50px; /* Use half of the width (120/2 = 60), to center the tooltip */
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 0.85rem;
+    width: max-content;
+    max-width: 160px;
 }
 
-.tooltip .tooltiptext.info {
-    font-size: 0.9em;
-    color: #fff;
-    width: 80px;
-    margin-left: -40px;
-}
-
-/* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
     visibility: visible;
+    opacity: 1;
 }
 
 .no-hover:hover {
     cursor: grab;
-    cursor: -moz-grab;
-    cursor: -webkit-grab;
 }
